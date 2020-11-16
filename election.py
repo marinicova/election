@@ -7,6 +7,10 @@ import csv
 
 def main() -> None:
     url = starting_url
+
+    if not url.startswith("https://volby.cz/pls/ps2017nss/ps32?xjazyk=CZ&xkraj="):
+        raise ValueError("Incorrect url address")
+
     print("Processing data")
     locations = find_locations(url)
     data = [final_data(location) for location in locations]
