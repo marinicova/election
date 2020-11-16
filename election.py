@@ -49,7 +49,12 @@ def final_data(locations: list) -> dict:
 
     try:
         data["CODE"] = locations[1]
-        data["LOCATION"] = soup.find_all("h3")[2].text.split(": ")[1].strip("\n")
+
+        if len(soup.find_all("h3")) > 2:
+            data["LOCATION"] = soup.find_all("h3")[2].text.split(": ")[1].strip("\n")
+        else:
+            data["LOCATION"] = soup.find_all("h3")[1].text.split(": ")[1].strip("\n")
+
         data["REGISTERED"] = tables[0].find_all("td")[3].text
         data["ENVELOPES"] = tables[0].find_all("td")[4].text
         data["VALID"] = tables[0].find_all("td")[7].text
